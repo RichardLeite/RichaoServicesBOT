@@ -1,13 +1,5 @@
 {
     "name": "richao-services-bot",
     "version": 2,
-    "public": false,
-    "build": {
-        "use": "@vercel/node"
-    },
-    "routes":[
-        {
-        "src": "/(.*)",
-        "dest": "api/index.js"
-    }]
+    "public": false  
 }
