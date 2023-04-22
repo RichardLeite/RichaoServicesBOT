@@ -7,9 +7,9 @@
   "name": "richao-services-bot",
   "version": "1.0.0",
   "description": "bot com intuito de ajudar em outro projeto chamado Richao Services",
-  "main": "api/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node .",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
