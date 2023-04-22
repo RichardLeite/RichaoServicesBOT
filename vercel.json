@@ -3,7 +3,6 @@
     "version": 2,
     "public": false,
     "build": {
-        "src": "api/index.js",
         "use": "@vercel/node"
     },
     "routes":[
