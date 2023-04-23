@@ -1,0 +1,14 @@
+version: "3"
+services:
+  richao-services-bot:
+    image: richardleite/richao-services-bot
+    container_name: richao-services-bot
+    environment:
+      - PUID=998
+      - PGID=1000
+      - TOKEN=Your_Token
+      - CLIENT_ID=Your_Client_ID
+      - GUILD_ID=Your_Guild_Id
+    ports:
+      - 3000:3000
+    restart: unless-stopped
