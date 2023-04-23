@@ -34,9 +34,9 @@ module.exports = {
 
   async execute(interaction) {
     const ip = await getExternalIp();
-    exampleEmbed.spliceFields(1, 1, { name: 'Jellyfin', value: `[Clique aqui para assistir Filmes, Animes, Séries, Cursos, entre outros.](https://${ip}:8096)`, inline: true });
-    exampleEmbed.spliceFields(3, 1, { name: 'Jellyseerr', value: `[Clique aqui para solicitar algum contéudo a ser adicionado no Jellyfin.](https://${ip}:5055)`, inline: true });
-    exampleEmbed.spliceFields(5, 1, { name: 'Jfa-Go', value: `[Clique aqui para criar sua conta e acessar os serviços anteriormente mencionados.](https://${ip}:8056)`, inline: true });
+    exampleEmbed.spliceFields(1, 1, { name: 'Jellyfin', value: `[Clique aqui para assistir Filmes, Animes, Séries, Cursos, entre outros.](http://${ip}:8096)`, inline: true });
+    exampleEmbed.spliceFields(3, 1, { name: 'Jellyseerr', value: `[Clique aqui para solicitar algum contéudo a ser adicionado no Jellyfin.](http://${ip}:5055)`, inline: true });
+    exampleEmbed.spliceFields(5, 1, { name: 'Jfa-Go', value: `[Clique aqui para criar sua conta e acessar os serviços anteriormente mencionados.](http://${ip}:8056)`, inline: true });
     await interaction.reply({ embeds: [exampleEmbed] })
   }
 }

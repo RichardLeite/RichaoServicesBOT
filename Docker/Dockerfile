@@ -4,12 +4,14 @@ RUN apk add --no-cache git
 
 RUN git clone https://github.com/RichardLeite/RichaoServicesBOT.git /usr/app/
 
-WORKDIR /usr/app/RichaoServicesBOT
+WORKDIR /usr/app/
 
 RUN npm install
 
-COPY ./.env /usr/app/RichaoServicesBOT
-
 EXPOSE 3000
+
+ENV TOKEN ""
+ENV CLIENT_ID ""
+ENV GUILD_ID ""
 
 CMD ["npm", "start"]
