@@ -1,4 +1,4 @@
-const { Client, Events, GatewayIntentBits, Collection, REST, Routes } = require('discord.js')
+const { Client, Events, GatewayIntentBits, Collection, REST, Routes, EmbedBuilder } = require('discord.js')
 
 // Dotenv
 const dotenv = require('dotenv')
@@ -39,7 +39,14 @@ const rest = new REST({version: "10"}).setToken(TOKEN);
     }
 })()
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] })
+const client = new Client({
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMembers,
+	],
+});
 client.commands = new Collection()
 
 for (const file of commandFiles){
@@ -57,6 +64,32 @@ client.once(Events.ClientReady, c => {
 	console.log(`Pronto! Login realizado como ${c.user.tag}`)
 });
 client.login(TOKEN)
+
+// Listener de eventos
+
+// Evento que envia mensagens de Boas Vindas
+client.on('guildMemberAdd', async member => {
+    console.log('Novo membro entrou no servidor!'); // Adicionado console.log
+    console.log(`Membro ${member.user.username} entrou no servidor!`);
+    // Pega o canal de boas-vindas pelo nome ou ID
+    const channel = member.guild.channels.cache.find(ch => ch.name === '『🟣』geral') || member.guild.channels.cache.get('1098809199984648194');
+    
+    // Obtém o número total de membros no servidor
+    const totalMembers = member.guild.memberCount;
+
+    // Obtém o número do membro atual
+    const memberNumber = totalMembers - (member.guild.members.cache.filter(member => !member.user.bot).size);
+
+    // Cria um embed personalizado com a mensagem de boas-vindas
+    const welcomeEmbed = new EmbedBuilder()
+      .setColor('Purple')
+      .setTitle(`Bem-vindo(a) ao servidor, ${member.user.username}!`)
+      .setDescription(`Você é o ${memberNumber}º de ${totalMembers} de membros do servidor!`)
+      .setThumbnail(member.user.displayAvatarURL());
+  
+    // Envia a mensagem de boas-vindas no canal
+    channel.send({ embeds: [welcomeEmbed] });
+  });
 
 // Listener de interações com o bot
 client.on(Events.InteractionCreate, async interaction =>{

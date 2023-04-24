@@ -6,16 +6,16 @@ module.exports = {
         .setDescription('Exclui uma quantidade de mensagens do canal.')
         .addIntegerOption(option =>
             option.setName('quantidade')
-                .setDescription('A quantidade de mensagens a serem excluídas.')
+                .setDescription('Selecione a quantidade das últimas mensagens enviadas no canal a serem excluídas.')
                 .setRequired(false))
         .addBooleanOption(option =>
-            option.setName('all')
+            option.setName('todas')
                 .setDescription('Se todas as mensagens do canal devem ser excluídas.')
                 .setRequired(false)),
 
     async execute(interaction) {
         const quantidade = interaction.options.getInteger('quantidade');
-        const all = interaction.options.getBoolean('all') || false;
+        const all = interaction.options.getBoolean('todas') || false;
 
         if (!interaction.member.permissions.has('ADMINISTRATOR')) {
             return await interaction.reply({
