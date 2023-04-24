@@ -12,20 +12,32 @@ async function getExternalIp() {
   }
 }
 
-const exampleEmbed = new EmbedBuilder()
+const LinksEmbed = new EmbedBuilder()
 	.setColor("Purple")
 	.setTitle("Links")
-	.setDescription("Links para acessar os nossos Serviços")
-	.addFields(
-    { name: '\u200B', value: '\u200B' },
-    { name: 'Jellyfin', value: `Jellyfin`, inline: true },
-    { name: '\u200B', value: '\u200B' },
-    { name: 'Jellyseerr', value: `Jellyseerr`, inline: true },
-    { name: '\u200B', value: '\u200B' },
-    { name: 'Jfa-Go', value: `Jfa-Go`, inline: true },
-    { name: '\u200B', value: '\u200B' }
-  )
+	.setDescription("Abaixo estão os Links para acessar os nossos Serviços")
+  
+const JfaGoEmbed = new EmbedBuilder()
+    .setColor("Purple")
+    .setTitle("Jfa-Go")
+    .setDescription("Aqui você pode criar sua conta e acessar os serviços abaixo. Você precisa de uma conta para conseguir entrar (Caso já tenha, desconsidere).")
+    .setThumbnail('https://cdn-icons-png.flaticon.com/512/1063/1063809.png')
+    .setFooter({ text: 'Caso tenha algum problema fale com o FUNDADOR ou STAFF.' });
+  
+const JellyfinEmbed = new EmbedBuilder()
+	.setColor("Purple")
+	.setTitle("Jellyfin")
+	.setDescription("Aqui você pode assistir Filmes, Animes, Séries, Cursos, entre outros.")
+  .setThumbnail('https://www.openhab.org/logos/jellyfin.png')
   .setFooter({ text: 'Caso tenha algum problema fale com o FUNDADOR ou STAFF.' });
+	
+const JellyseerrEmbed = new EmbedBuilder()
+	.setColor("Purple")
+	.setTitle("Jellyseerr")
+	.setDescription("Aqui você pode solicitar algum contéudo (Anime, Série, Filme e etc) a ser adicionado no Jellyfin.")
+  .setThumbnail('https://www.cyberflix.io/images/app-logos/jellyseerr.png')
+  .setFooter({ text: 'Caso tenha algum problema fale com o FUNDADOR ou STAFF.' });
+
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -34,9 +46,9 @@ module.exports = {
 
   async execute(interaction) {
     const ip = await getExternalIp();
-    exampleEmbed.spliceFields(1, 1, { name: 'Jellyfin', value: `[Clique aqui para assistir Filmes, Animes, Séries, Cursos, entre outros.](${ip}:8096)`, inline: true });
-    exampleEmbed.spliceFields(3, 1, { name: 'Jellyseerr', value: `[Clique aqui para solicitar algum contéudo a ser adicionado no Jellyfin.](${ip}:5055)`, inline: true });
-    exampleEmbed.spliceFields(5, 1, { name: 'Jfa-Go', value: `[Clique aqui para criar sua conta e acessar os serviços anteriormente mencionados.](${ip}:8056)`, inline: true });
-    await interaction.reply({ embeds: [exampleEmbed] })
+    JfaGoEmbed.addFields({ name: 'Acessar', value: `[Clique aqui para Criar sua conta no Jfa-Go](http://${ip}:8056/invite/g59HzEWaK6x4seZU2AgTT7)`, inline: true });
+    JellyfinEmbed.addFields({ name: 'Acessar', value: `[Clique aqui para Acessar o Jellyfin.](http://${ip}:8096)`, inline: true });
+    JellyseerrEmbed.addFields({ name: 'Acessar', value: `[Clique aqui para Acessar o Jellyseerr.](http://${ip}:5055)`, inline: true });
+    await interaction.reply({ embeds: [LinksEmbed, JfaGoEmbed, JellyfinEmbed, JellyseerrEmbed ] })
   }
 }
