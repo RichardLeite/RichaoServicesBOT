@@ -52,6 +52,7 @@ const JellyseerrEmbed = new EmbedBuilder()
   .setFooter({
     text: "Caso tenha algum problema fale com o FUNDADOR ou STAFF.",
   });
+h1;
 
 module.exports = {
   data: new SlashCommandBuilder()
