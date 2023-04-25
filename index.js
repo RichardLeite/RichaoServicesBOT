@@ -69,10 +69,8 @@ client.login(TOKEN)
 
 // Evento que envia mensagens de Boas Vindas
 client.on('guildMemberAdd', async member => {
-    console.log('Novo membro entrou no servidor!'); // Adicionado console.log
-    console.log(`Membro ${member.user.username} entrou no servidor!`);
     // Pega o canal de boas-vindas pelo nome ou ID
-    const channel = member.guild.channels.cache.find(ch => ch.name === '『🟣』geral') || member.guild.channels.cache.get('1098809199984648194');
+    const channel = member.guild.channels.cache.find(ch => ch.name === '『🟣』boas-vindas') || member.guild.channels.cache.get('1098809199984648194');
     
     // Obtém o número total de membros no servidor
     const totalMembers = member.guild.memberCount;
@@ -86,6 +84,12 @@ client.on('guildMemberAdd', async member => {
       .setTitle(`Bem-vindo(a) ao servidor, ${member.user.username}!`)
       .setDescription(`Você é o ${memberNumber}º de ${totalMembers} de membros do servidor!`)
       .setThumbnail(member.user.displayAvatarURL());
+
+    // Obtém o cargo 'Membros' pelo nome ou ID
+    const role = member.guild.roles.cache.find(role => role.name === 'Membros') || member.guild.roles.cache.get('1100044632240431134');
+  
+    // Adiciona o cargo incial ao membro
+    member.roles.add(role);
   
     // Envia a mensagem de boas-vindas no canal
     channel.send({ embeds: [welcomeEmbed] });
