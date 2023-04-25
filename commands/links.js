@@ -62,17 +62,17 @@ module.exports = {
     const ip = await getExternalIp();
     JellyfinEmbed.spliceFields(0, 1, {
       name: "Jellyfin",
-      value: `[Clique aqui para Acessar o Jellyfin.](${ip}:8096)`,
+      value: `[Clique aqui para Acessar o Jellyfin.](http://${ip}:8096)`,
       inline: true,
     });
     JellyseerrEmbed.spliceFields(0, 1, {
       name: "Jellyseerr",
-      value: `[Clique aqui para Acessar o Jellyseerr.](${ip}:5055)`,
+      value: `[Clique aqui para Acessar o Jellyseerr.](http://${ip}:5055)`,
       inline: true,
     });
     JfaGoEmbed.spliceFields(0, 1, {
       name: "Jfa-Go",
-      value: `[Clique aqui para Criar sua conta no Jfa-Go](${ip}:8056/invite/g59HzEWaK6x4seZU2AgTT7)`,
+      value: `[Clique aqui para Criar sua conta no Jfa-Go](http://${ip}:8056/invite/g59HzEWaK6x4seZU2AgTT7)`,
       inline: true,
     });
     await interaction.reply({
