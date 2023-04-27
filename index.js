@@ -78,6 +78,24 @@ client.login(TOKEN);
 
 // Listener de eventos
 
+// Adiciona reações ao canal de Pedidos
+client.on("messageCreate", async (message) => {
+  // Verifica se a mensagem foi enviada no canal especificado
+  if (message.channel.id === "1098811511855644732") {
+    // Verifica se a mensagem é uma embed e se contém a substring "Request Now Available" no título
+    if (
+      message.embeds.length &&
+      message.embeds[0].title.includes("Request Now Available")
+    ) {
+      // Adiciona uma reação à mensagem
+      await message.react("👍");
+      await message.react("❤️");
+      await message.react("👎");
+      await message.react("❌");
+    }
+  }
+});
+
 // Evento que envia mensagens de Boas Vindas
 client.on("guildMemberAdd", async (member) => {
   // Pega o canal de boas-vindas pelo nome ou ID
