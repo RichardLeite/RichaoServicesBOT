@@ -84,8 +84,9 @@ client.on("messageCreate", async (message) => {
   if (message.channel.id === "1098811511855644732") {
     // Verifica se a mensagem é uma embed e se contém a substring "Request Now Available" no título
     if (
-      message.embeds.length &&
-      message.embeds[0].title.includes("Request Now Available")
+      message.embeds.length > 0 &&
+      message.embeds[0].author &&
+      message.embeds[0].author.name.includes("Request Now Available")
     ) {
       // Adiciona uma reação à mensagem
       await message.react("👍");
