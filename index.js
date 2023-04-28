@@ -76,7 +76,42 @@ client.once(Events.ClientReady, (c) => {
 });
 client.login(TOKEN);
 
-// Listener de eventos
+// Listener de eventos abaixo
+
+// Menciona usuário no canal de Pedidos
+client.on("messageCreate", async (message) => {
+  // Verifica se a mensagem foi enviada no canal desejado
+  if (message.channel.id === "1098811511855644732") {
+    // Verifica se a mensagem é uma embed e se contém a substring "Request Now Available" no título
+    if (
+      message.embeds.length > 0 &&
+      message.embeds[0].author &&
+      message.embeds[0].author.name.includes("Request Now Available")
+    ) {
+      // Obtém o valor do field "Requested By"
+      const requestedByField = message.embeds[0].fields.find(
+        (field) => field.name === "Requested By"
+      );
+      const requestedBy = requestedByField.value;
+      if (requestedBy) {
+        const requestedByMember = await message.guild.members.fetch({
+          query: requestedBy,
+          limit: 1,
+        });
+        if (requestedByMember.size) {
+          const member = requestedByMember.first();
+          message.reply(`${member.user}, sua solicitação foi concluída!`);
+        } else {
+          message.reply(`@${requestedBy}, sua solicitação foi concluída!`);
+        }
+      } else {
+        console.log(
+          "Não foi possível encontrar o campo 'Requested By' no embed."
+        );
+      }
+    }
+  }
+});
 
 // Adiciona reações ao canal de Pedidos
 client.on("messageCreate", async (message) => {
