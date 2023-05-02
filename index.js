@@ -78,7 +78,8 @@ client.login(TOKEN);
 
 // Listener de eventos abaixo
 
-// Menciona usuário no canal de Pedidos
+// Comentado pois não será utilizado atualmente
+/* // Menciona usuário no canal de Pedidos
 client.on("messageCreate", async (message) => {
   // Verifica se a mensagem foi enviada no canal desejado
   if (message.channel.id === "1098811511855644732") {
@@ -111,7 +112,7 @@ client.on("messageCreate", async (message) => {
       }
     }
   }
-});
+}); */
 
 // Adiciona reações ao canal de Pedidos
 client.on("messageCreate", async (message) => {
