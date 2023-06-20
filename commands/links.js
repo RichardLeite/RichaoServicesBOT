@@ -48,7 +48,9 @@ const JellyseerrEmbed = new EmbedBuilder()
     "Aqui você pode solicitar algum contéudo (Anime, Série, Filme e etc) a ser adicionado no Jellyfin."
   )
   .addFields({ name: "Jellyseerr", value: " " })
-  .setThumbnail("https://www.cyberflix.io/images/app-logos/jellyseerr.png")
+  .setThumbnail(
+    "https://static-00.iconduck.com/assets.00/jellyseerr-icon-512x492-iwuo1nft.png"
+  )
   .setFooter({
     text: "Caso tenha algum problema fale com o FUNDADOR ou STAFF.",
   });
