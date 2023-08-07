@@ -74,7 +74,7 @@ module.exports = {
     });
     JfaGoEmbed.spliceFields(0, 1, {
       name: "Jfa-Go",
-      value: `[Clique aqui para Criar sua conta no Jfa-Go](http://${ip}:8056/invite/g59HzEWaK6x4seZU2AgTT7)`,
+      value: `[Clique aqui para Criar sua conta no Jfa-Go](http://${ip}:8056/invite/nzJz2bcJKXDzgLCoTfigp5)`,
       inline: true,
     });
     await interaction.reply({
