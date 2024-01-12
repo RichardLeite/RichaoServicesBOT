@@ -11,7 +11,16 @@ const {
 // Dotenv
 const dotenv = require("dotenv");
 dotenv.config();
-const { TOKEN, CLIENT_ID, GUILD_ID } = process.env;
+const {
+  TOKEN,
+  CLIENT_ID,
+  GUILD_ID,
+  MESSAGE_CREATE_CHANNEL_ID,
+  WELCOME_CHANNEL_ID,
+  WELCOME_CHANNEL_NAME,
+  MEMBERS_ROLE_ID,
+  MEMBERS_ROLE_NAME,
+} = process.env;
 
 // Importação dos comandos
 const fs = require("node:fs");
@@ -76,48 +85,10 @@ client.once(Events.ClientReady, (c) => {
 });
 client.login(TOKEN);
 
-// Listener de eventos abaixo
-
-// Comentado pois não será utilizado atualmente
-/* // Menciona usuário no canal de Pedidos
-client.on("messageCreate", async (message) => {
-  // Verifica se a mensagem foi enviada no canal desejado
-  if (message.channel.id === "1098811511855644732") {
-    // Verifica se a mensagem é uma embed e se contém a substring "Request Now Available" no título
-    if (
-      message.embeds.length > 0 &&
-      message.embeds[0].author &&
-      message.embeds[0].author.name.includes("Request Now Available")
-    ) {
-      // Obtém o valor do field "Requested By"
-      const requestedByField = message.embeds[0].fields.find(
-        (field) => field.name === "Requested By"
-      );
-      const requestedBy = requestedByField.value;
-      if (requestedBy) {
-        const requestedByMember = await message.guild.members.fetch({
-          query: requestedBy,
-          limit: 1,
-        });
-        if (requestedByMember.size) {
-          const member = requestedByMember.first();
-          message.reply(`${member.user}, sua solicitação foi concluída!`);
-        } else {
-          message.reply(`@${requestedBy}, sua solicitação foi concluída!`);
-        }
-      } else {
-        console.log(
-          "Não foi possível encontrar o campo 'Requested By' no embed."
-        );
-      }
-    }
-  }
-}); */
-
 // Adiciona reações ao canal de Pedidos
 client.on("messageCreate", async (message) => {
   // Verifica se a mensagem foi enviada no canal especificado
-  if (message.channel.id === "1098811511855644732") {
+  if (message.channel.id === MESSAGE_CREATE_CHANNEL_ID) {
     // Verifica se a mensagem é uma embed e se contém a substring "Request Now Available" no título
     if (
       message.embeds.length > 0 &&
@@ -137,8 +108,9 @@ client.on("messageCreate", async (message) => {
 client.on("guildMemberAdd", async (member) => {
   // Pega o canal de boas-vindas pelo nome ou ID
   const channel =
-    member.guild.channels.cache.find((ch) => ch.name === "『🟣』boas-vindas") ||
-    member.guild.channels.cache.get("1098809199984648194");
+    member.guild.channels.cache.find(
+      (ch) => ch.name === WELCOME_CHANNEL_NAME
+    ) || member.guild.channels.cache.get(WELCOME_CHANNEL_ID);
 
   // Cria um embed personalizado com a mensagem de boas-vindas
   const welcomeEmbed = new EmbedBuilder()
@@ -149,10 +121,10 @@ client.on("guildMemberAdd", async (member) => {
 
   // Obtém o cargo 'Membros' pelo nome ou ID
   const role =
-    member.guild.roles.cache.find((role) => role.name === "Membros") ||
-    member.guild.roles.cache.get("1100044632240431134");
+    member.guild.roles.cache.find((role) => role.name === MEMBERS_ROLE_NAME) ||
+    member.guild.roles.cache.get(MEMBERS_ROLE_ID);
 
-  // Adiciona o cargo incial ao membro
+  // Adiciona o cargo inicial ao membro
   member.roles.add(role);
 
   // Envia a mensagem de boas-vindas no canal

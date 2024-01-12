@@ -2,6 +2,11 @@ const axios = require("axios");
 
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
+// Dotenv
+const dotenv = require("dotenv");
+dotenv.config();
+const { EXTERNAL_HOSTNAME } = process.env;
+
 async function getExternalIp() {
   try {
     const response = await axios.get("https://api.ipify.org?format=json");
@@ -61,20 +66,22 @@ module.exports = {
     .setDescription("Links para acessar os nossos Serviços"),
 
   async execute(interaction) {
-    const ip = await getExternalIp();
+    // Verifica se tem um hostname definido no .env ou encontra o IP externo da própria rede
+    const hostname = EXTERNAL_HOSTNAME || (await getExternalIp());
+
     JellyfinEmbed.spliceFields(0, 1, {
       name: "Jellyfin",
-      value: `[Clique aqui para Acessar o Jellyfin.](http://${ip}:8096)`,
+      value: `[Clique aqui para Acessar o Jellyfin.](http://${hostname}:8096)`,
       inline: true,
     });
     JellyseerrEmbed.spliceFields(0, 1, {
       name: "Jellyseerr",
-      value: `[Clique aqui para Acessar o Jellyseerr.](http://${ip}:5055)`,
+      value: `[Clique aqui para Acessar o Jellyseerr.](http://${hostname}:5055)`,
       inline: true,
     });
     JfaGoEmbed.spliceFields(0, 1, {
       name: "Jfa-Go",
-      value: `[Clique aqui para Criar sua conta no Jfa-Go](http://${ip}:8056/invite/nzJz2bcJKXDzgLCoTfigp5)`,
+      value: `[Clique aqui para Criar sua conta no Jfa-Go](http://${hostname}:8056/invite/nzJz2bcJKXDzgLCoTfigp5)`,
       inline: true,
     });
     await interaction.reply({
