@@ -5,7 +5,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 // Dotenv
 const dotenv = require("dotenv");
 dotenv.config();
-const { EXTERNAL_HOSTNAME } = process.env;
+const { EXTERNAL_HOSTNAME, INVITE_CODE } = process.env;
 
 async function getExternalIp() {
   try {
@@ -81,7 +81,7 @@ module.exports = {
     });
     JfaGoEmbed.spliceFields(0, 1, {
       name: "Jfa-Go",
-      value: `[Clique aqui para Criar sua conta no Jfa-Go](http://${hostname}:8056/invite/nzJz2bcJKXDzgLCoTfigp5)`,
+      value: `[Clique aqui para Criar sua conta no Jfa-Go](http://${hostname}:8056/invite/${INVITE_CODE})`,
       inline: true,
     });
     await interaction.reply({
