@@ -119,13 +119,13 @@ client.on("guildMemberAdd", async (member) => {
     .setDescription(`Você é o ${member.guild.memberCount}º membro do servidor!`)
     .setThumbnail(member.user.displayAvatarURL());
 
-  // Obtém o cargo 'Membros' pelo nome ou ID
+  /* // Obtém o cargo pelo nome ou ID
   const role =
     member.guild.roles.cache.find((role) => role.name === MEMBERS_ROLE_NAME) ||
     member.guild.roles.cache.get(MEMBERS_ROLE_ID);
 
   // Adiciona o cargo inicial ao membro
-  member.roles.add(role);
+  member.roles.add(role); */
 
   // Envia a mensagem de boas-vindas no canal
   channel.send({ embeds: [welcomeEmbed] });
