@@ -46,6 +46,18 @@ const rest = new REST({ version: "10" }).setToken(TOKEN);
   try {
     console.log(`Resentando ${commands.length} comandos...`);
 
+    // GET
+    const existsCommands = await rest.get(
+      Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID)
+    );
+
+    // DELETE
+    for (const command of existsCommands) {
+      await rest.delete(
+        Routes.applicationGuildCommand(CLIENT_ID, GUILD_ID, command.id)
+      );
+    }
+
     // PUT
     const data = await rest.put(
       Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
@@ -96,10 +108,10 @@ client.on("messageCreate", async (message) => {
       message.embeds[0].author.name.includes("Request Now Available")
     ) {
       // Adiciona uma reação à mensagem
+      await message.react("✅");
       await message.react("👍");
-      await message.react("❤️");
-      await message.react("👎");
       await message.react("❌");
+      await message.react("👎");
     }
   }
 });
