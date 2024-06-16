@@ -8,6 +8,7 @@ WORKDIR /usr/app/
 
 COPY start.sh /usr/app/start.sh
 
+RUN touch /usr/app/.lastupdate
 RUN chmod +x /usr/app/start.sh
 
 EXPOSE 3000
